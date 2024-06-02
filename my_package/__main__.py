@@ -14,8 +14,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     search_keywords = args.keywords
-    # for search_keyword in search_keywords:
-    #     wanted_crawling(search_keyword)
+    for search_keyword in search_keywords:
+        wanted_crawling(search_keyword)
 
     directory_path = './data'
     all_files = os.listdir(directory_path)
