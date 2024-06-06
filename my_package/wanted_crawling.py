@@ -1,7 +1,7 @@
 import os
 import re
 import time
-import argparse
+import datetime
 import pandas as pd
 
 from tqdm import tqdm
@@ -52,6 +52,11 @@ def search_text(left_cond, right_cond, text):
     if search:
         search = search.group(1).strip()
     return search
+
+
+# -------------------- 년월일 --------------------
+now = datetime.datetime.now()
+ymd_name = now.strftime('%Y%m%d')
 
 
 # -------------------- 크롬 준비 --------------------
@@ -178,5 +183,5 @@ def wanted_crawling(search_keyword):
 
     df = pd.DataFrame(data)
     os.makedirs('./data', exist_ok=True)
-    csv_name = f'./data/{search_keyword}.csv'
+    csv_name = f'./data/{search_keyword}_{ymd_name}.csv'
     df.to_csv(csv_name, index=False, encoding='utf-8-sig')
