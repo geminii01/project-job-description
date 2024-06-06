@@ -178,6 +178,7 @@ def wanted_crawling(search_keyword):
         'intro': config2['intro'], # 포지션 상세,
         'benefit': config2['benefit'], # 혜택 및 복지
         # 'jobdesc': config['jobdesc'], # JD 상세 내용
+        'crawl_date': f'{ymd_name}', # 크롤링한 년월일
         'label': f'{search_keyword}',
     }
 
