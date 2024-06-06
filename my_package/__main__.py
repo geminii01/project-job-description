@@ -4,9 +4,13 @@ import pandas as pd
 from wanted_crawling import wanted_crawling
 # from save_db import save_db
 
+
+def split_keywords(x):
+    return [item.strip() for item in x.split(',')]
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--keywords', nargs='+', required=True, help='Search keyword')
+    parser.add_argument('--keywords', type=split_keywords, required=True, help='Search keyword')
     # parser.add_argument('--host', required=True, help='Database host')
     # parser.add_argument('--user', required=True, help='Database user')
     # parser.add_argument('--password', required=True, help='Database password')
