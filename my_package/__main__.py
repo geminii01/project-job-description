@@ -1,9 +1,13 @@
 import os
+import datetime
 import argparse
 import pandas as pd
 from wanted_crawling import wanted_crawling
 # from save_db import save_db
 
+
+now = datetime.datetime.now()
+ym_name = now.strftime('%Y%m')
 
 def split_keywords(x):
     return [item.strip() for item in x.split(',')]
@@ -32,6 +36,6 @@ if __name__ == "__main__":
         dataframes.append(df)
 
     concat_df = pd.concat(dataframes, ignore_index=True)
-    concat_df.to_csv('./final_data.csv', index=False, encoding='utf-8-sig')
+    concat_df.to_csv(f'./final_data_{ym_name}.csv', index=False, encoding='utf-8-sig')
 
     # save_db(args.host, args.user, args.password, args.port)
