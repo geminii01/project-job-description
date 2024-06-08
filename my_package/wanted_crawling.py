@@ -74,7 +74,7 @@ def wanted_crawling(search_keyword):
         'workplace': list(), # JD 근무지역
     }
 
-    print(f'\n\n##### {search_keyword} #####')
+    print(f'\n[{search_keyword}]')
 
     content_num = driver.find_element(By.XPATH, '//*[@id="search_tabpanel_position"]/div/div[1]/h2').text
     content_num = int(content_num.replace('포지션', '')) # 공고 개수
