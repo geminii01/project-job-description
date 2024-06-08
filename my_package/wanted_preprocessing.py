@@ -83,7 +83,7 @@ def wanted_preprocessing(config, search_keyword):
         'workplace': config['workplace'], # JD 근무지역
     }
     src_df = pd.DataFrame(src_data)
-    path = './data/src'
+    path = './data/source'
     os.makedirs(path, exist_ok=True)
     csv_name = f'{path}/{search_keyword}_{ymd_name}.csv'
     src_df.to_csv(csv_name, index=False, encoding='utf-8-sig')
@@ -112,7 +112,7 @@ def wanted_preprocessing(config, search_keyword):
         'label': f'{search_keyword}', # 키워드
     }
     lbl_df = pd.DataFrame(lbl_data)
-    path = './data/lbl'
+    path = './data/labeled'
     os.makedirs(path, exist_ok=True)
     csv_name = f'{path}/{search_keyword}_{ymd_name}.csv'
     lbl_df.to_csv(csv_name, index=False, encoding='utf-8-sig')
