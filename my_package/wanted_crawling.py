@@ -1,9 +1,5 @@
-import os
-import re
 import time
 import datetime
-import numpy as np
-import pandas as pd
 
 from tqdm import tqdm
 
@@ -44,14 +40,6 @@ def elem_return_0(Name, List):
 ## 수집명, 수집 개수 반환
 def elem_return_1(Name, List):
     print(f'{Name} {len(List)}')
-
-
-## 조건에 맞는 텍스트 추출
-def search_text(left_cond, right_cond, text):
-    search = re.search(rf'{left_cond}(.*){right_cond}', text, re.DOTALL)
-    if search:
-        return search.group(1).strip()
-    return np.nan
 
 
 # -------------------- 년월일 --------------------
@@ -142,47 +130,4 @@ def wanted_crawling(search_keyword):
 
     driver.close()
 
-
-    ## JD 텍스트 추출 및 마감일 텍스트 전처리
-    temp = pd.DataFrame({'jobdesc': config['jobdesc'], 'due': config['due']})
-
-    config2 = {
-        'mainwork': list(), # 주요업무
-        'requirement': list(), # 자격요건
-        'preferential': list(), # 우대사항
-        'intro': list(), # 포지션 상세,
-        'benefit': list(), # 혜택 및 복지
-    }
-
-    config2['mainwork'] = temp['jobdesc'].apply(lambda x: search_text('주요업무', '자격요건', x))
-    config2['requirement'] = temp['jobdesc'].apply(lambda x: search_text('자격요건', '우대사항', x))
-    config2['preferential'] = temp['jobdesc'].apply(lambda x: search_text('우대사항', '혜택 및 복지', x))
-    config2['intro'] = temp['jobdesc'].apply(lambda x: search_text('포지션 상세', '주요업무', x))
-    config2['benefit'] = temp['jobdesc'].apply(lambda x: search_text('혜택 및 복지', '', x))
-
-    config['due'] = temp['due'].apply(lambda x: x.split()[1])
-
-
-    ## 데이터프레임 생성 및 저장
-    data = {
-        'link': config['link'], # 공고 링크
-        'title': config['title'], # 공고 제목
-        'company': config['company'], # 공고 회사
-        'mainwork': config2['mainwork'], # 주요업무
-        'requirement': config2['requirement'], # 자격요건
-        'preferential': config2['preferential'], # 우대사항
-        'skill': [', '.join(skills) for skills in config['skill']], # JD 기술 스택/툴
-        'due': config['due'], # JD 마감일
-        'workplace': config['workplace'], # JD 근무지역
-        
-        'intro': config2['intro'], # 포지션 상세,
-        'benefit': config2['benefit'], # 혜택 및 복지
-        # 'jobdesc': config['jobdesc'], # JD 상세 내용
-        'crawl_date': f'{ymd_name}', # 크롤링한 년월일
-        'label': f'{search_keyword}',
-    }
-
-    df = pd.DataFrame(data)
-    os.makedirs('./data', exist_ok=True)
-    csv_name = f'./data/{search_keyword}_{ymd_name}.csv'
-    df.to_csv(csv_name, index=False, encoding='utf-8-sig')
+    return config
