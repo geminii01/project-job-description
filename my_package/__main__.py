@@ -38,6 +38,6 @@ if __name__ == "__main__":
         dataframes.append(df)
 
     concat_df = pd.concat(dataframes, ignore_index=True)
-    concat_df.to_csv(f'./final_data_{ym_name}.csv', index=False, encoding='utf-8-sig')
+    concat_df.to_csv(f'./data/final_data_{ym_name}.csv', index=False, encoding='utf-8-sig')
 
     # save_db(args.host, args.user, args.password, args.port)
