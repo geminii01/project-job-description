@@ -27,7 +27,7 @@ if __name__ == "__main__":
         config = wanted_crawling(search_keyword) # 크롤링
         wanted_preprocessing(config, search_keyword) # 전처리 및 데이터 저장
 
-    path = './data/lbl'
+    path = './data/labeled'
     files = os.listdir(path)
     csv_files = [file for file in files if file.endswith('.csv')]
 
