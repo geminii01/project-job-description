@@ -2,6 +2,7 @@ import os
 import re
 import time
 import datetime
+import numpy as np
 import pandas as pd
 
 from tqdm import tqdm
@@ -47,11 +48,10 @@ def elem_return_1(Name, List):
 
 ## 조건에 맞는 텍스트 추출
 def search_text(left_cond, right_cond, text):
-    text = text
     search = re.search(rf'{left_cond}(.*){right_cond}', text, re.DOTALL)
     if search:
-        search = search.group(1).strip()
-    return search
+        return search.group(1).strip()
+    return np.nan
 
 
 # -------------------- 년월일 --------------------
