@@ -13,7 +13,7 @@ ym_name = now.strftime('%Y%m')
 def split_keywords(x):
     return [item.strip() for item in x.split(',')]
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--keywords', type=split_keywords, required=True, help='Search keyword')
     # parser.add_argument('--host', required=True, help='Database host')
@@ -41,3 +41,6 @@ if __name__ == "__main__":
     concat_df.to_csv(f'./data/final_data_{ym_name}.csv', index=False, encoding='utf-8-sig')
 
     # save_db(args.host, args.user, args.password, args.port)
+
+if __name__ == "__main__":
+    main()
